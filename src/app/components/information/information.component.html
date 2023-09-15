@@ -1,0 +1,45 @@
+
+<div class="ltn__contact-address-area mb-90" *ngFor="let center of Data">
+    <div class="container">
+        <h3 style="font-size: 32px;
+        color: var(--bs-green);
+        text-transform: uppercase;
+        font-weight: 700;
+        position: relative;
+        padding-bottom: 20px;
+        /* display: inline-block; */">Coordonnées</h3>
+        <div class="row" style="margin-left: 26px;">
+            <div class="col-lg-12" style="margin-top: -9px;">
+                <div class="ltn__contact-address-item ltn__contact-address-item-3 box-shadow"
+                    style="height: 73px;width: 199px;">
+                    <div class="ltn__contact-address-icon"><img src="assets/img/icons/10.png" alt="Icon Image"
+                            style="max-width: 22px;"></div>
+                    <h3 style="color: darkslategrey;margin-top: -32px;margin-bottom: -11px;font-size: 12px;">Email</h3>
+                    <a id="emailLink" style="font-size: 9px;" href="mailto:{{center.email}}">{{center.email}}</a>
+                </div>
+            </div>
+            <div class="col-lg-12" style="margin-top: -26px;">
+                <div class="ltn__contact-address-item ltn__contact-address-item-3 box-shadow"
+                    style="/* height: 99px; *//* width: 200px; */height: 73px;width: 199px;">
+                    <div class="ltn__contact-address-icon"><img src="assets/img/icons/11.png" alt="Icon Image"
+                            style="max-width: 22px;"></div>
+                    <h3 style="color: darkslategrey;margin-top: -32px;margin-bottom: -4px;font-size: 11px;">Télèphone
+                    </h3>
+                    <p style="font-size: 9px;"><a href="tel:{{center.tele}}">{{center.tele}}</a> <br></p>
+                </div>
+            </div>
+            <div class="col-lg-12" style="margin-top: -26px;">
+                <div class="ltn__contact-address-item ltn__contact-address-item-3 box-shadow"
+                    style="/* height: 106px; *//* width: 200px; */height: 73px;width: 199px;">
+                    <div class="ltn__contact-address-icon"><img src="assets/img/icons/12.png" alt="Icon Image"
+                            style="max-width: 22px;"></div>
+                    <h3 _ngcontent-ng-c758040789=""
+                        style="color: darkslategrey;margin-top: -32px;margin-bottom: -4px;font-size: 11px;">Addresse
+                    </h3>
+                    <p style="font-size: 9px;">{{center.adresse}}<br></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

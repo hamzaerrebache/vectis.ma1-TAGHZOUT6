@@ -1,0 +1,300 @@
+
+<div style="padding-top: 150px">
+  <div class="ltn__breadcrumb-area ltn__breadcrumb-area-2  "
+    style="padding-top: 1px; padding-bottom: 90px;background-color: white;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <div class="article-content clearfix " style="margin-top: -71px;" *ngFor="let center of centersData">
+      <br />
+      <div class="entry-content clearfix">
+        <div style="margin-bottom: -252px;">
+          <div class="row">
+            <div class="titre col-md-8" style="height: 42px;
+        margin-top: 56px;">
+              <h1 style="font-size: 40px;
+         color: var(--bs-green);
+         text-transform: uppercase;
+         font-weight: 700;">Centre <span style="color: #ffc300;">{{center.name}}</span></h1>
+
+            </div>
+
+
+            <div class="col-md-4" style="height: 100px; position: relative;">
+              <img src="{{center.logReseau}}" style="position: absolute; bottom: 0; right: 12px;">
+            </div>
+            <div class="col-md-3">
+              <div class="d-flex justify-content-between">
+                <ul class="typeVeh" style="
+          display: inline-flex;">
+                  <li style=" list-style: none;margin-right: 15px;" *ngFor="let type of center.categorie">
+                    <div style="display: flex; align-items: center;">
+                      <img style="width:50px" src="assets/camion.png" *ngIf="type  === 'Camion'">
+                      <img style="width:50px" src="assets/voiture.png" *ngIf="type  === 'Voiture'">
+
+                    </div>
+                    <span style="position: absolute;margin-left: 16px;font-family: 'Rajdhani';color: #00013b;"
+                      *ngIf="type=='Camion'">PL</span>
+                    <span style="position: absolute;margin-left: 16px;font-family: 'Rajdhani';color: #00013b;"
+                      *ngIf="type=='Voiture'">VL</span>
+
+                  </li>
+                </ul>
+
+
+              </div>
+            </div>
+
+          </div>
+          <div class="row" style="float: right;margin-top: -46px;">
+            <div class="col-12">
+              <div class="dropdown">
+                <div class="dropdown-button" [class.with-before-alt]="statut === 'Ouvert'"
+                  [class.with-before]="statut === 'Fermé'"><span>{{statut}} </span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <p>
+          <app-slider-detail></app-slider-detail>
+        </p>
+
+        <div class="row">
+
+
+          <div class="col-lg-4  col-sm-12 col-md-12 " style="text-align: center;margin-bottom: 30px;">
+            <h3 style="font-size: 32px;
+            color: var(--bs-green);
+            text-transform: uppercase;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 20px;
+            /* display: inline-block; */
+            ">NOS SERVICES</h3>
+
+            <div class="service">
+              <a style="border: 2px solid var(--bs-green);
+              padding: 10px 22.75px 10px 22.75px;
+              color: white;
+              background-color: var(--bs-green);" href="Rendez-vous" (click)="RendezVous(center.id)"
+                class="action web-site ico-before"><i class="far fa-calendar"></i> PRENDRE RENDEZ-VOUS</a>
+
+            </div>
+            <div class="service mt-30">
+              <a style="border: 2px solid var(--bs-green);
+              padding: 10px 10px 10px 10px;
+              color: white;
+              text-transform: uppercase;
+              background-color: var(--bs-green);" href="Reclamation" (click)="Reclamation(center.id)"
+                class="action web-site ico-before"><i class="far fa-comment"></i> PASSER UNE RéCLAMATION</a>
+
+            </div>
+            <div class="service mt-30">
+              <a style=" border: 2px solid var(--bs-green);
+              padding: 10px 34.5px 10px 34.5px;
+              color: white;
+              text-transform: uppercase;
+              background-color: var(--bs-green);
+          " href="Center-details/{{centerId}}#comment" class="action web-site ico-before"><i
+                  class="fas fa-pencil-alt"></i>
+                DONNER VOTRE AVIS</a>
+
+            </div>
+            <div class=" mt-30">
+              <a style="border: 2px solid var(--bs-green);
+                padding: 10px 68.25px 10px 80.25px;
+              color: white;
+             
+              background-color: var(--bs-green);
+          " href="https://www.google.com/maps?q={{CurrentCoordinates.latitude}},{{CurrentCoordinates.longitude}}"
+                class="action web-site ico-before" target="_blank"><i class="fas fa-location-arrow"></i> ITINÉRAIRE</a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-sm-12 col-md-12 " style="text-align: center;margin-bottom: -80px;">
+
+            <app-information [Data]="centersData"></app-information>
+          </div>
+          <div class="col-lg-4 col-sm-12 col-md-12 " style="TEXT-ALIGN: CENTER;margin-bottom: 143px;">
+            <h3 style="font-size: 32px;
+            color: var(--bs-green);
+            text-transform: uppercase;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 20px;
+            /* display: inline-block; */
+            ">horaire de centre</h3>
+            <div _ngcontent-ng-c672930887=""
+              style="box-shadow: black 2px 2px 2px;border: 2px solid var(--border-color-1);height: 225px;margin-top: -8px;padding-top: 0px;/* font-weight: bold; */">
+              <ul _ngcontent-ng-c672930887=""
+                style="list-style: none;font-size: 12px;margin-top: -8px;font-weight: bold;">
+                <li _ngcontent-ng-c672930887="">Lundi <span _ngcontent-ng-c672930887="">08:00AM - 18:30PM</span></li>
+                <li _ngcontent-ng-c672930887="">Mardi <span _ngcontent-ng-c672930887="">08:00AM - 18:30PM</span></li>
+                <li _ngcontent-ng-c672930887="">Mercredi <span _ngcontent-ng-c672930887="">08:00AM - 18:30PM</span></li>
+                <li _ngcontent-ng-c672930887="">Jeudi <span _ngcontent-ng-c672930887="">08:00AM - 18:30PM</span></li>
+                <li _ngcontent-ng-c672930887="">Vendredi <span _ngcontent-ng-c672930887="">08:00AM - 18:30PM</span></li>
+                <li _ngcontent-ng-c672930887="">Samedi <span _ngcontent-ng-c672930887="">08:00AM - 12:00AM</span></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+
+        <h3 style="font-size: 32px;
+        color: var(--bs-green);
+        text-transform: uppercase;
+        font-weight: 700;
+        position: relative;
+        padding-bottom: 20px;
+        /* display: inline-block; */
+        text-align: center;margin-top: -113px;">Localisation</h3>
+        <div class="row">
+
+          <div class="col-12">
+            <div id="map"></div>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+          <h2 style="margin-top: 15px;font-size: 32px;
+          color: var(--bs-green);
+          text-transform: uppercase;
+          font-weight: 700;
+          position: relative;
+          padding-bottom: 20px;
+          
+          text-align: center;" *ngIf="Centers1.length >= 1">Centres à proximité</h2>
+          <div style="margin-top: 20px; " class="row">
+            <div *ngFor="let center of Centers1" class="col-lg-4">
+              <div class="ltn__map-item " [style.background-image]="'url(' + center.logReseau + ')'" style="
+              background-repeat: no-repeat;
+              background-position: top right;
+              background-size: 72px;">
+                <div class="container">
+                  <div class="info">
+                    <h3 class="ltn__location-name"
+                      style=" color: #007D40;
+                      padding: 5px 10px 5px 10px; margin-bottom: 12px; font-size: 20px;">
+                      {{ center.name }}
+                    </h3>
+                  </div>
+                </div>
+                <h5 class="ltn__location-single-info" style="font-size: 15px;">
+                  <i class="fas fa-map-marked-alt" style="color: var(--ltn__secondary-color); background-color: transparent;
+                    width: 34px; height: 40px; font-style:normal ;"></i>{{ center.adresse }}<br>
+                </h5>
+                <h4 class="ltn__location-single-info" style="font-family: 'Roboto';
+                  margin-bottom: 1px; font-size: 17px;">
+                  <i class="fas fa-phone-volume" style="color: var(--ltn__secondary-color); background-color: transparent;
+                    width: 34px; height: 40px;font-style:normal"></i><a href="tel:{{center.tele}}">{{ center.tele }}</a>
+                </h4>
+                <div _ngcontent-ng-c3850533388="" class="row">
+                  <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
+                    style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011=""
+                      href="/Center-details/{{center.id}}" class="action web-site ico-before"><i
+                        class="fa-solid fa-circle-info"></i>Détails</a></div>
+                  <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
+                    style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011=""
+                      target="_blank" href="https://www.google.com/maps?q={{center.lat}},{{center.lng}}"
+                      class="action web-site ico-before"><i class="fas fa-map"></i>Itinéraire</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Popular Post Widget -->
+        <div class="widget ltn__popular-post-widget" style="    margin-bottom: -22px;
+        box-shadow: black 2px 2px 2px;
+        margin-top: 24px;
+        padding: 35px 30px 40px 35px;
+        border: 2px solid var(--border-color-11);">
+          <div class="row">
+            <div class="col-6" *ngFor="let center of centersData">
+              <h4 class="ltn_widget-title ltn_widget-title-border">Commentaires sur {{center.name}}</h4>
+            </div>
+            <div id="comment" class="col-6">
+              <div class="card-body p-2  d-flex align-items-center" style="margin-top: -11px;">
+                <h6 class="text-success fw-bold small mb-0 me-1">Commentaires "Activés"</h6>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
+                    [(ngModel)]="commentsEnabled" checked />
+                  <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container"></div>
+          <ul *ngIf="commentsEnabled">
+            <li *ngFor="let comment of allCommentParCentre">
+              <div class="popular-post-widget-item clearfix">
+                <div class="popular-post-widget-img">
+                  <img src="assets/img/team/5.jpg" alt="#">
+                </div>
+                <div class="popular-post-widget-brief">
+                  <h2 class="text-danger">{{comment.name}}</h2>
+                  <h4>{{comment.description}}.</h4>
+                  <div class="ltn__blog-meta">
+                    <ul>
+                      <li class="ltn__blog-date">
+                        <a ><i class="far fa-calendar-alt"></i>{{comment.date}}</a>
+                      </li>
+                      <li>
+                        <p-rating [(ngModel)]="comment.value" [readonly]="true" [cancel]="false"></p-rating>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- Menu Widget (Category) -->
+        <div class="ltn_page-details-area ltn_blog-details-area mb-50 mt-50">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="ltn__blog-details-wrap" style="box-shadow: black 2px 2px 2px;">
+                  <!-- comment-reply -->
+                  <div class="ltn_comment-reply-area ltn_form-box mb-60---">
+                    <h4 class="title-2">Poster un commentaire</h4>
+                    <form [formGroup]="CommentForm" id="comment-form" (submit)="sendComment()">
+                      <div class="row">
+                        <div class="flex justify-content-center " style="padding-bottom: 20px;">
+                          <p-rating formControlName="rating" [cancel]="false"></p-rating>
+                        </div>
+                        <div class="input-item input-item-name ltn__custom-icon col-md-12">
+                          <input type="text" placeholder="Votre nom ici." name="name" formControlName="name">
+                        </div>
+                        <div class="input-item input-item-textarea ltn__custom-icon col-md-12">
+                          <textarea placeholder="Votre commentaire ici." name="description"
+                            formControlName="description"></textarea>
+                        </div>
+                        <div class="input-item input-item-name  col-md-12">
+                          <div class="btn-wrapper">
+                            <button class="commont" type="submit"><i class="fa-solid fa-paper-plane"></i>
+                              Valider</button>
+                          </div>
+                        </div>
+
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="javascript:history.back()" class="l"><button style="font-family: 'Roboto';margin-top: 12px;
+          margin-bottom: 13px;
+          width: 100px;
+          height: 47px;
+          color: white;
+          background-color: 
+          var(--ltn__secondary-color)"><i class="fas fa-chevron-left"></i>Retour </button></a>
+      </div>
+
+    </div>
+  </div>

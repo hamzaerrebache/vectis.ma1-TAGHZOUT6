@@ -1,0 +1,28 @@
+.mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+.mat-mdc-form-field {
+    margin-top: 16px;
+  }
+  *{
+    font-family: 'Roboto', sans-serif;
+  }
+
+.ltn_breadcrumb-area{
+  margin-top: 40px; 
+  padding-top: 100px;
+  padding-bottom: 28px;
+}
+
+/* @media (max-width: 767px)
+.ltn_breadcrumb-area{
+    margin-bottom: 80px;
+} */
+.media{
+  padding-top: 117px;
+}
+@media (max-width:767px){
+  .ltn__breadcrumb-area-2{
+      margin-top: 43px;
+  }
+}

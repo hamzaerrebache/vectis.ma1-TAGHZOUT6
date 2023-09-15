@@ -1,0 +1,135 @@
+.icon-home {
+    width: 20px;
+    height: 20px;
+    background: url("src/assets/img/home.svg") no-repeat;
+    background-size: contain;
+    display: inline-block;
+  }
+  a.std-btn:hover {
+    background-color: white;
+    border: 1px solid var(--ltn__secondary-color-2);
+    color: black;
+    background-image: url(src/assets/img/angle-right-black.svg);
+    background-size: 21px;
+    font-family: 'Roboto', sans-serif;
+}
+
+  .icon-separate {
+    width: 20px;
+    height: 20px;
+    background: url("src/assets/img/angle-right-black.svg") no-repeat;
+    background-size: contain;
+    display: inline-block;
+  }
+
+  span {
+    vertical-align: middle;
+    font-family: 'Roboto', sans-serif;
+
+
+    a {
+      color: #000;
+      font-family: 'Roboto', sans-serif;
+    }
+  }
+
+
+/**Partage réseaux sociaux**/
+.social-btns {
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+  float: none !important;
+
+
+}
+
+#default-page {
+  .img-container {
+    margin-bottom: 25px;
+  }
+
+  .text {
+    ul {
+      padding-left: 15px;
+    }
+  }
+}
+
+/**********
+RECHERCHE FORMATIONS
+**********/
+#formation-search-container {
+  padding: 20px 0;
+  background-color: #EBEBEB;
+
+ 
+
+  h1 {
+    text-transform: inherit;
+  }
+
+
+  .toggle-advanced-search {
+    display: flex;
+    justify-content: flex-start;
+
+   
+  }
+
+  .formation-search {
+    padding: 50px 0;
+    margin: 0 auto;
+
+    
+
+    .search-bar {
+      margin-bottom: 35px;
+      display: flex;
+
+      input[type=search],
+      input[type=submit] {
+        display: inline-block;
+        height: 60px;
+        padding: 0;
+        vertical-align: middle;
+      }
+
+      input[type=search] {
+        width: calc(100% - 60px);
+        padding-left: 15px;
+        
+        border: 1px solid #707070;
+
+       
+      }
+    }
+}
+}
+
+
+.std-btn{
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 100px;
+    color: #fff;
+    display: inline-block;
+    padding: 8px 20px;
+    color: #fff;
+    background-color: var(--ltn__secondary-color-2);
+    border: 1px solid white;
+    border-radius: 3px;
+    -webkit-transition: background 0.2s ease-out;
+    -moz-transition: background 0.2s ease-out;
+    -o-transition: background 0.2s ease-out;
+    transition: background 0.2s ease-out;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 8px 30px 8px 40px;
+    background-image: url(src/assets/img/angle-right.svg);
+    background-repeat: no-repeat;
+    background-position: 15px center;
+    background-size: 12px;
+    box-sizing: border-box;
+}

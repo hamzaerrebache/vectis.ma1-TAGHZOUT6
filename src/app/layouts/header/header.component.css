@@ -1,0 +1,306 @@
+/* 
+.select{
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        font: normal 11px/22px Arial, Sans-Serif;
+        color: black;
+        border: 1px solid #ccc;
+        padding: 30px;
+}
+.dropdown{
+   margin: 8px;
+}
+form{
+   margin: 6px;
+}
+
+  button.button-search:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    transition: 1s;
+  }
+
+
+.btn {
+        border-radius: 0;
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 700;
+        font-family: var(--ltn__heading-font);
+        padding: 17px 48px;
+        text-align: center;
+        cursor: pointer;
+        -webkit-transition: all 0.3s ease 0s;
+        -o-transition: all 0.3s ease 0s;
+        transition: all 0.3s ease 0s;
+        position: relative;
+        z-index: 1;
+        margin-right: 0px;
+    }
+    
+    .dropdown-toggle {
+        white-space: nowrap;
+    }
+    .btn-secondary {
+        color: #fff;
+        background-color: rgb(7, 145, 85);
+        border-color: rgb(7, 145, 85);
+    }
+    .btn-check:focus+.btn-secondary, .btn-secondary:focus {
+        box-shadow: none;
+    }
+.Logo{
+  width: 90px;
+}
+
+
+.btn{
+        background-color: var(--ltn__secondary-color);
+        top: 15px;
+}
+.suggestion-list {
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: #fff;
+  }
+  
+  .suggestion-list > div {
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  .suggestion-list > div:hover {
+    background-color: #f0f0f0;
+  }
+  .btnSearch{
+    top: 14px;
+    margin-top: 276px;
+    background-color: var(--bs-green);
+    margin-right: 24px;
+    padding: 14px 55px 18px 55px;
+    color: #fff;
+
+    
+  }
+  .btnSearch:hover{
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+
+  } */
+  .select{
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    font: normal 11px/22px Arial, Sans-Serif;
+    color: #00013b;
+    border: 1px solid #ccc;
+    padding: 30px;
+}
+li.active {
+  border-color: #007bff; /* Highlight color when active */
+}
+.dropdown{
+margin: 8px;
+}
+form{
+margin: 6px;
+}
+input{
+  font-family: 'Roboto', sans-serif;
+}
+
+button.button-search:hover {
+background-color: white;
+color: #00013b;
+border: 1px solid black;
+transition: 1s;
+}
+
+
+
+.btn {
+    border-radius: 0;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    padding: 17px 48px;
+    text-align: center;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    position: relative;
+    z-index: 1;
+    /* margin-right: 15px; */
+    margin-right: 0px;
+}
+
+.dropdown-toggle {
+    white-space: nowrap;
+}
+.btn-secondary {
+    color: #fff;
+    background-color: rgb(7, 145, 85);
+    border-color: rgb(7, 145, 85);
+}
+.btn-check:focus+.btn-secondary, .btn-secondary:focus {
+    box-shadow: none;
+}
+.Logo{
+width: 90px;
+}
+
+
+.btn{
+    background-color: var(--ltn__secondary-color);
+    top: 15px;
+}
+.suggestion-list {
+border: 1px solid #ccc;
+max-height: 150px;
+overflow-y: auto;
+background-color: #fff;
+}
+
+.suggestion-list > div {
+padding: 5px;
+cursor: pointer;
+}
+
+.suggestion-list > div:hover {
+background-color: #f0f0f0;
+}
+.btnSearch{
+top: 14px;
+margin-top: 276px;
+background-color: var(--bs-green);
+margin-right: 24px;
+padding: 14px 55px 18px 55px;
+color: #fff;
+
+
+}
+.btnSearch:hover{
+background-color: white;
+border: 1px solid black;
+color: #00013b;
+
+}
+.cool-link {
+display: inline-block;
+font-size: 13px;
+color: #00013b;
+text-decoration: none;
+position: relative; /* Ajoutez ceci pour que ::after soit positionné par rapport à .cool-link */
+}
+
+.cool-link::after {
+content: '';
+display: block;
+width: 0;
+height: 3px;
+background: #ffc300;
+transition: width .3s;
+bottom: 17px; /* Positionne la bordure en dessous du texte */
+left: 0; /* Alignement à gauche */
+}
+
+.cool-link:hover::after,
+.cool-link:focus::after {
+width: 100%;
+transition: width .3s;
+}
+
+/* Ajoutez ceci pour activer la bordure au clic */
+.cool-link:active::after {
+width: 100%;
+}
+
+.cool-link.active::after {
+content: '';
+display: block;
+width: 100%; /* La bordure inférieure s'étend sur toute la largeur */
+height: 3px;
+background: #ffc300;
+}
+
+.cool-link {
+display: inline-block;
+font-size: 13px;
+color: #00013b;
+text-decoration: none;
+position: relative; /* Ajoutez ceci pour que ::after soit positionné par rapport à .cool-link */
+}
+
+.cool-link::after {
+content: '';
+display: block;
+width: 0;
+height: 3px;
+background: #ffc300;
+transition: width .3s;
+bottom: 17px; /* Positionne la bordure en dessous du texte */
+left: 0; /* Alignement à gauche */
+}
+
+.cool-link:hover::after,
+.cool-link:focus::after {
+width: 100%;
+transition: width .3s;
+}
+
+/* Ajoutez ceci pour activer la bordure au clic */
+.cool-link:active::after {
+width: 100%;
+}
+
+.cool-link.active::after {
+content: '';
+display: block;
+width: 100%; /* La bordure inférieure s'étend sur toute la largeur */
+height: 3px;
+background: #ffc300;
+}
+/*-----------*/
+.cool-link1 {
+  display: inline-block;
+  font-size: 13px;
+  color: #00013b;
+  text-decoration: none;
+  position: relative; /* Ajoutez ceci pour que ::after soit positionné par rapport à .cool-link */
+  }
+  
+  .cool-link1::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 3px;
+  background: #ffc300;
+  transition: width .3s;
+  bottom: -2px; /* Positionne la bordure en dessous du texte */
+  left: 0; /* Alignement à gauche */
+  }
+  
+  .cool-link1:hover::after,
+  .cool-link1:focus::after {
+  width: 100%;
+  transition: width .3s;
+  }
+  
+  /* Ajoutez ceci pour activer la bordure au clic */
+  .cool-link1:active::after {
+  width: 100%;
+  }
+  
+  .cool-link1.active::after {
+  content: '';
+  display: block;
+  width: 100%; /* La bordure inférieure s'étend sur toute la largeur */
+  height: 3px;
+  background:#ffc300;
+  }

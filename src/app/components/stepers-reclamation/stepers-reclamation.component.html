@@ -1,0 +1,236 @@
+<mat-stepper [linear]="true" [formGroup]="stepperFormGroup" labelPosition="bottom" #stepper er style="margin-bottom: 100px; margin-top: -100px;">
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel> Informations personnelles</ng-template>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field>
+                <mat-label>Prénom</mat-label>
+               <div class="input-item input-item-name ltn__custom-icon">
+                  <input matInput placeholder="Prénom" formControlName="PreCtrl" required >
+               </div>
+               <mat-error *ngIf="firstFormGroup?.get('PreCtrl')?.hasError('required') && firstFormGroup?.get('PreCtrl')?.touched">Le prénom est requis.</mat-error>
+               <mat-error *ngIf="firstFormGroup?.get('PreCtrl')?.hasError('maxlength')">Le prénom ne doit pas dépasser 100 caractères.</mat-error>
+              </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field>
+                <mat-label>Nom </mat-label>
+               <div  class="input-item input-item-name ltn__custom-icon">
+                  <input matInput placeholder="Nom de famille" formControlName="NomCtrl" required >
+               </div>
+               <mat-error *ngIf="firstFormGroup?.get('NomCtrl')?.hasError('required') && firstFormGroup?.get('NomCtrl')?.touched">Le nom est requis.</mat-error>
+               <mat-error *ngIf="firstFormGroup?.get('NomCtrl')?.hasError('maxlength')">Le nom ne doit pas dépasser 100 caractères.</mat-error>
+              </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field>
+                <mat-label>Adresse e-mail</mat-label>
+               <div class="input-item input-item-email ltn__custom-icon">
+                  <input matInput placeholder="Adresse e-mail" formControlName="EmailCtrl" required >
+               </div>
+               <mat-error *ngIf="firstFormGroup?.get('EmailCtrl')?.hasError('required')&& firstFormGroup?.get('EmailCtrl')?.touched">L'adresse e-mail est requise.</mat-error>
+               <mat-error *ngIf="firstFormGroup?.get('EmailCtrl')?.hasError('email')">L'adresse e-mail doit être valide.</mat-error>
+              </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field>
+                <mat-label>Numéro de téléphone</mat-label>
+               <div  class="input-item input-item-phone ltn__custom-icon">
+                  <input matInput placeholder="0660805899"  formControlName="TeleCtrl" required >
+               </div>
+               <mat-error *ngIf="firstFormGroup?.get('TeleCtrl')?.hasError('required') && firstFormGroup?.get('TeleCtrl')?.touched">Le numéro de téléphone est requis.</mat-error>
+               <mat-error *ngIf="firstFormGroup?.get('TeleCtrl')?.hasError('minLength') "> Le numéro de téléphone doit avoir  13 chiffres.</mat-error>
+               <mat-error *ngIf="firstFormGroup?.get('TeleCtrl')?.hasError('pattern')">Format de numéro de téléphone invalide.</mat-error>
+
+              </mat-form-field>
+
+       </div>
+
+            <div class="col-md-6">
+              <mat-form-field>
+                  <mat-label>Numéro d'immatriculation</mat-label>
+                  <div  class="input-item  input-item-car ltn__custom-icon">
+
+                  <input matInput formControlName="MatriculeCtrl" placeholder="Numéro d'immatriculation" required>
+                  </div>
+                </mat-form-field>
+                <mat-error *ngIf="firstFormGroup?.get('MatriculeCtrl')?.hasError('required') && firstFormGroup?.get('MatriculeCtrl')?.touched">Le matricule  est requis.</mat-error>
+                <mat-error *ngIf="firstFormGroup?.get('MatriculeCtrl')?.hasError('maxlength')">Le matricule  ne doit pas dépasser 100 caractères.</mat-error>
+             </div>
+        </div>
+        <div>
+          <button matStepperNext class="button" [disabled]="!firstFormGroup.valid"  [ngStyle]="{
+            'background-color': !firstFormGroup.valid ? 'grey' : 'green'
+         }">Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+
+
+
+    
+    <mat-step *ngIf="selectedCentreId === null" [stepControl]="thirdFormGroup" >
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Choisissez le centre</ng-template>
+        <div class="row">
+          <div class="col-lg-4 col-md-4">
+            <div class="input-item input-item-time">
+              <mat-form-field>
+                <mat-label>Choisissez une ville</mat-label>
+                <mat-select (selectionChange)="onCitySelect($event.value)">
+                  <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          
+          <div class="col-lg-4 col-md-4">
+            <div class="input-item input-item-time">
+              <mat-form-field>
+                <mat-label>Choisissez un réseau</mat-label>
+                <mat-select (selectionChange)="onReseauSelect($event.value)">
+                  <mat-option *ngFor="let reseau of reseaux" [value]="reseau">{{ reseau }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+    
+          <div class="col-lg-4 col-md-4">
+            <div class="input-item input-item-time">
+              <mat-form-field>
+                <mat-label>Choisissez votre centre</mat-label>
+                <mat-select [compareWith]="compareCentres" formControlName="centreCtrl">
+                  <input style="background-color: var(--border-color-8); border-bottom: 2px solid #3F51B5"
+                         type="text" matInput placeholder="Rechercher un centre" (input)="filterCentres($event)">
+                  <mat-option *ngFor="let centre of filteredCentres" [value]="centre.id">
+                    {{ centre?.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="thirdFormGroup?.get('centreCtrl')?.hasError('required') && thirdFormGroup?.get('centreCtrl')?.touched">Veuillez sélectionner un centre de service.</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+    
+        <div>
+          <button class="button" matStepperPrevious>Retour</button>
+          <button class="button" matStepperNext [disabled]="!thirdFormGroup.valid"  [ngStyle]="{
+            'background-color': !thirdFormGroup.valid ? 'grey' : 'green'
+}">Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+    
+    
+
+
+      <mat-step *ngIf="selectedCentreId !== null" [stepControl]="thirdFormGroup" >
+        <form [formGroup]="thirdFormGroup">
+          <ng-template matStepLabel>Choisissez le centre</ng-template>
+          <div class="row">
+            <div class="col-lg-12 col-md-6">
+              <div class="input-item input-item-time">
+                <mat-form-field>
+                  <mat-label>Choisissez votre centre</mat-label>
+                  <mat-select formControlName="centreCtrl">
+                    <mat-option  [value]="selected?.id">
+                      {{ selected?.name}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="thirdFormGroup?.get('centreCtrl')?.hasError('required') && thirdFormGroup?.get('centreCtrl')?.touched">Veuillez sélectionner un centre de service.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button class="button" matStepperPrevious>Retour</button>
+            <button class="button" matStepperNext [disabled]="!thirdFormGroup.valid"  [ngStyle]="{
+              'background-color': !thirdFormGroup.valid ? 'grey' : 'green' }">Suivant</button>
+          </div>
+        </form>
+      </mat-step>
+
+
+
+      <mat-step [stepControl]=" fifthFormGroup" optional>
+        <form [formGroup]=" fifthFormGroup">
+          <ng-template matStepLabel>Description de la réclamation</ng-template>
+          <div class="row">
+          <div class="col-md-12">
+              <mat-form-field>
+                  <mat-label>Description détaillée de la réclamation et des problèmes rencontrés</mat-label>
+                  <textarea matInput formControlName="descriptionCtrl" rows="4" required></textarea>
+                  <mat-error *ngIf="fifthFormGroup?.get('descriptionCtrl')?.hasError('required') && fifthFormGroup?.get('descriptionCtrl')?.touched">Veuillez fournir une description détaillée de la réclamation.</mat-error>
+              </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <label>Pièces jointes :</label>
+            <br>
+            <button type="button" mat-raised-button (click)="fileInput.click()">Choisir un fichier <i class="fas fa-file"></i></button>
+            <input hidden (change)="onReceiptChange($event)" #fileInput type="file" formControlName="receiptCtrl" >
+            <span class="file-name">{{nameFile}}</span>
+            <div *ngIf="selectedReceipt">
+              <img [src]="selectedReceipt" style="    width: 200px;
+              margin-bottom: 30px" alt="Receipt sélectionné">
+          </div>
+        </div>
+        </div>
+          <div style="margin-top: 20px;">
+            <button  class="button" matStepperPrevious>Retour</button>
+            <button  class="button" matStepperNext [disabled]="!fifthFormGroup.valid"  [ngStyle]="{
+              'background-color': !fifthFormGroup.valid ? 'grey' : 'green'
+  }" >Suivant</button>
+          </div>
+        </form>
+      </mat-step> 
+
+
+
+    <mat-step>
+      <ng-template matStepLabel>Fin</ng-template>
+      <div class="ltn__team-details-area">
+        <div class="container">
+            <div class="row">
+              <h2>Informations de la réclamation</h2>
+                <div class="col-lg-12 justify-content-center" style="background-color: var(--border-color-8);
+                margin-bottom: 34px;" >
+                    <div class="ltn__team-details-member-info-details">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="ltn__team-details-member-about">
+                                    <ul>
+                                      <li><strong>Nom:</strong> {{ this.firstFormGroup.get('NomCtrl')?.value}}</li>
+                                      <li><strong>Prénom:</strong> {{ this.firstFormGroup.get('PreCtrl')?.value }}</li>
+                                      <li><strong>Email:</strong> {{ this.firstFormGroup.get('EmailCtrl')?.value}}</li>
+                                      <li><strong>Téléphone:</strong> {{ this.firstFormGroup.get('TeleCtrl')?.value}}</li>
+                                      <li><strong>Matricule:</strong> {{ this.firstFormGroup.get('MatriculeCtrl')?.value}}</li>                 
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="ltn__team-details-member-about">
+                                    <ul>
+                                      <li><strong>Reseau :</strong> <img src="{{getLogReseau()}}"></li>
+                                      <li><strong>Centre:</strong> {{getName()}}</li>
+                                      <li><strong>Description:</strong> {{this.fifthFormGroup.get('descriptionCtrl')?.value }}</li> 
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      <div>
+        <form [formGroup]="fifthFormGroup" (ngSubmit)="submitReclamationData()">
+        <button  class="button" matStepperPrevious>Retour</button>
+        <button class="Annuler" (click)="stepper.reset()">Annuler</button>
+        <button  class="Soumettre" type="submit" (click)=" showSwwal()" >Soumettre</button>
+      </form>
+      </div>
+    </mat-step>
+    
+  </mat-stepper>

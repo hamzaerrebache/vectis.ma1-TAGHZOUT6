@@ -1,0 +1,359 @@
+<mat-stepper [linear]="true" [formGroup]="stepperFormGroup" labelPosition="bottom" #stepper style="margin-bottom: 100px; margin-top: -100px; ">
+  <div class="mobile-steps-wrapper">
+   
+    <mat-step [stepControl]="firstFormGroup" >
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Informations sur la visite technique </ng-template>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-item input-item-time">
+                  <mat-form-field>
+                    <mat-label>type de véhicule</mat-label>
+                    <mat-select formControlName="typeVehiculeCtrl" >
+                      <mat-option *ngFor="let vehicule of typeVehicules" [value]="vehicule.value">
+                        {{vehicule.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="firstFormGroup?.get('typeVehiculeCtrl')?.hasError('required') && firstFormGroup?.get('typeVehiculeCtrl')?.touched">genre de véhicule est requise.</mat-error>
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-item input-item-time">
+                <mat-form-field>
+                  <mat-label> type  de visite</mat-label>
+                  <mat-select formControlName="typeVisiteCtrl" >
+                    <mat-option *ngFor="let visite of typeVisites" [value]="visite.value">
+                      {{visite.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="firstFormGroup?.get('typeVisiteCtrl')?.hasError('required') && firstFormGroup?.get('typeVisiteCtrl')?.touched">genre  de visite est requise.</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+               <!-- <h6>De quel type de service avez-vous besoin pour votre véhicule ?</h6>
+               <div class="input-item input-item-textarea ltn__custom-icon col-6">
+                   <textarea name="ltn__message" placeholder="Enter message" matInput formControlName="textCtrl" ></textarea>
+                   <mat-error *ngIf="firstFormGroup?.get('textCtrl')?.hasError('required') && firstFormGroup?.get('textCtrl')?.touched">La description est requise.</mat-error>
+               </div> -->
+          </div>
+    
+        <div>
+          <button  class="button" matStepperNext [disabled]="!firstFormGroup.valid"  [ngStyle]="{
+            'background-color': !firstFormGroup.valid ? 'grey' : 'green'
+          }">Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+
+
+
+
+    <mat-step *ngIf="selectedCentreId === null" [stepControl]="secondFormGroup" >
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Choisissez le centre</ng-template>
+        <div class="row">
+          <div class="col-lg-4 col-md-4">
+            <div class="input-item input-item-time">
+              <mat-form-field>
+                <mat-label>Choisissez une ville</mat-label>
+                <mat-select (selectionChange)="onCitySelect($event.value)">
+                  <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          
+          <div class="col-lg-4 col-md-4">
+            <div class="input-item input-item-time">
+              <mat-form-field>
+                <mat-label>Choisissez un réseau</mat-label>
+                <mat-select (selectionChange)="onReseauSelect($event.value)">
+                  <mat-option *ngFor="let reseau of reseaux" [value]="reseau">{{ reseau }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+    
+          <div class="col-lg-4 col-md-4">
+            <div class="input-item input-item-time">
+              <mat-form-field>
+                <mat-label>Choisissez votre centre</mat-label>
+                <mat-select [compareWith]="compareCentres" formControlName="centreCtrl">
+                  <input style="background-color: var(--border-color-8); border-bottom: 2px solid #3F51B5"
+                         type="text" matInput placeholder="Rechercher un centre" (input)="filterCentres($event)">
+                  <mat-option *ngFor="let centre of filteredCentres" [value]="centre.id">
+                    {{ centre?.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="secondFormGroup?.get('centreCtrl')?.hasError('required')
+                 && secondFormGroup?.get('centreCtrl')?.touched">Veuillez sélectionner un centre de service.</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div style="margin-left: 44px;margin-bottom: 12px;
+margin-top: 17px;"><a style="cursor: pointer;color: green;" [ngClass]="{'disabled-link':open==true}" (click)="onSubmit()">Autres lieux proches de votre recherche</a>
+
+</div>
+
+<mat-accordion >
+
+    <mat-expansion-panel *ngFor="let center of Centers1" style="width: 320px;
+    margin-left: 16px;margin-bottom: 10px;
+    margin-top: 10px;" >
+      <mat-expansion-panel-header>
+        <mat-panel-title style=" margin-right: 16px;">
+          <span class="name-centre">
+            {{center.name}}
+            <br>
+            <span style="font-weight: 400;
+            color: #ef0000;font-family: auto;
+        ">Distance: {{center.distance}} Km</span>
+          </span>
+          
+        </mat-panel-title>
+        
+      </mat-expansion-panel-header>
+      <div role="region" class="mat-expansion-panel-content">
+        <div class="mat-expansion-panel-body">
+          <div class="location-info">
+            <div class="location-info-item">
+              <div class="left-box">
+                <p>{{center.adresse}}</p>
+                <div style="font-style: normal;
+                font-weight: normal;
+                font-variant: normal;
+                text-transform: none;
+                line-height: 4;">
+                  <i aria-hidden="true" class="fas fa-phone"></i>
+                  <span> {{center.tele}}</span>
+                </div>
+                <div  style="font-style: normal;
+                font-weight: normal;
+                font-variant: normal;
+                text-transform: none;
+                line-height: 4;">
+                    <i aria-hidden="true" class="fas fa-envelope"></i>
+                    <span> {{center.name}}@vetis.ma</span>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <mat-action-row class="mat-action-row">
+          <div class="select-location-btn">
+            <button matStepperNext style="background-color: mediumseagreen;" mat-button (click)="changer(center.name,center.id)" class="mat-button-base">
+              <span class="mat-button-wrapper" style="color: white;">CHANGER DE LIEU</span>
+            </button>
+          </div>
+        </mat-action-row>
+      </div>
+      
+     
+     
+    </mat-expansion-panel>
+  </mat-accordion>
+  
+
+          </div>
+ </div>
+
+    
+        <div>
+          <button class="button" matStepperPrevious>Retour</button>
+          <button class="button" matStepperNext [disabled]="!secondFormGroup.valid"  [ngStyle]="{
+            'background-color': !secondFormGroup.valid ? 'grey' : 'green'
+          }">Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+    
+    
+
+
+      <mat-step *ngIf="selectedCentreId !== null" [stepControl]="secondFormGroup" >
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Choisissez le centre</ng-template>
+          <div class="row">
+            <div class="col-lg-12 col-md-6">
+              <div class="input-item input-item-time">
+                <mat-form-field>
+                  <mat-label>Choisissez votre centre</mat-label>
+                  <mat-select formControlName="centreCtrl">
+                    <mat-option  [value]="selected?.id">
+                      {{ selected?.name}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="secondFormGroup?.get('centreCtrl')?.hasError('required') && secondFormGroup?.get('centreCtrl')?.touched">Veuillez sélectionner un centre de service.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <button class="button" matStepperPrevious>Retour</button>
+            <button class="button" matStepperNext [disabled]="!secondFormGroup.valid"  [ngStyle]="{
+              'background-color': !secondFormGroup.valid ? 'grey' : 'green'
+            }">Suivant</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="thirdFormGroup ">
+        <form [formGroup]="thirdFormGroup">
+          <ng-template matStepLabel> Informations sur les clients</ng-template>
+          <div class="row">
+              <div class="col-md-6">
+                  <mat-form-field>
+                      <mat-label>Prénom</mat-label>
+                     <div class="input-item input-item-name ltn__custom-icon">
+                        <input matInput placeholder="Prénom" formControlName="PreCtrl" required >
+                     </div>
+                     <mat-error *ngIf="thirdFormGroup?.get('PreCtrl')?.hasError('required') && thirdFormGroup?.get('PreCtrl')?.touched">Le prénom est requis.</mat-error>
+                     <mat-error *ngIf="thirdFormGroup?.get('PreCtrl')?.hasError('maxlength')">Le prénom ne doit pas dépasser 100 caractères.</mat-error>
+                    </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                  <mat-form-field>
+                      <mat-label>Nom </mat-label>
+                     <div  class="input-item input-item-name ltn__custom-icon">
+                        <input matInput placeholder="Nom de famille" formControlName="NomCtrl" required >
+                     </div>
+                     <mat-error *ngIf="thirdFormGroup?.get('NomCtrl')?.hasError('required') && thirdFormGroup?.get('NomCtrl')?.touched">Le nom est requis.</mat-error>
+                     <mat-error *ngIf="thirdFormGroup?.get('NomCtrl')?.hasError('maxlength')">Le nom ne doit pas dépasser 100 caractères.</mat-error>
+                    </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                  <mat-form-field>
+                      <mat-label>Adresse e-mail</mat-label>
+                     <div class="input-item input-item-email ltn__custom-icon">
+                        <input matInput placeholder="Adresse e-mail" formControlName="EmailCtrl" required >
+                     </div>
+                     <mat-error *ngIf="thirdFormGroup?.get('EmailCtrl')?.hasError('required') && thirdFormGroup?.get('EmailCtrl')?.touched">L'adresse e-mail est requise.</mat-error>
+                     <mat-error *ngIf="thirdFormGroup?.get('EmailCtrl')?.hasError('email')">L'adresse e-mail doit être valide.</mat-error>
+                    </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                  <mat-form-field>
+                      <mat-label>Numéro de téléphone</mat-label>
+                     <div  class="input-item input-item-phone ltn__custom-icon">
+                        <input matInput placeholder="0660805899" formControlName="TeleCtrl" required >
+                     </div>
+                     <mat-error *ngIf="thirdFormGroup?.get('TeleCtrl')?.hasError('required') && thirdFormGroup?.get('TeleCtrl')?.touched">Le numéro de téléphone est requis.</mat-error>
+                     <mat-error *ngIf="thirdFormGroup?.get('TeleCtrl')?.hasError('pattern')">Le numéro de téléphone doit être au format marocain.</mat-error>
+                    </mat-form-field>
+              </div>
+          </div>
+          <div>
+            <button  class="button" matStepperPrevious>Retour</button>
+            <button matStepperNext class="button" [disabled]="!thirdFormGroup.valid"  [ngStyle]="{
+              'background-color': !thirdFormGroup.valid ? 'grey' : 'green'
+            }">Suivant</button>
+          </div>
+        </form>
+      </mat-step>
+
+
+
+      <mat-step [stepControl]="fourthFormGroup" >
+        <form [formGroup]="fourthFormGroup">
+          <ng-template matStepLabel>sélectionner la date et l'heure</ng-template>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field>
+                <mat-label>Sélectionner la date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="dateCtrl">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="fourthFormGroup?.get('dateCtrl')?.hasError('required') && fourthFormGroup?.get('dateCtrl')?.touched">
+                  La date du rendez-vous est requise.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6"  >
+              <div class="input-item input-item-time">
+                <mat-form-field *ngIf="firstFormGroup.get('typeVehiculeCtrl')?.value === 'VL'">
+                  <mat-label>HH:MM</mat-label>
+                  <mat-select formControlName="timeCtrl">
+                    <mat-option *ngFor="let time of times" [value]="time.value">
+                      {{ time.viewValue }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="fourthFormGroup?.get('timeCtrl')?.hasError('required') && fourthFormGroup?.get('timeCtrl')?.touched">L'heure du rendez-vous est requise.</mat-error>
+                </mat-form-field>
+              
+                <mat-form-field *ngIf="firstFormGroup.get('typeVehiculeCtrl')?.value === 'PL'">
+                  <mat-label>HH:MM</mat-label>
+                  <mat-select formControlName="timeCtrl">
+                    <mat-option *ngFor="let time of times2" [value]="time.value">
+                      {{ time.viewValue }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="fourthFormGroup?.get('timeCtrl')?.hasError('required') && fourthFormGroup?.get('timeCtrl')?.touched">L'heure du rendez-vous est requise.</mat-error>
+                </mat-form-field>
+              </div>
+              
+          </div>
+        </div>
+          <div>
+            <button  class="button" matStepperPrevious>Retour</button>
+            <button  class="button" matStepperNext [disabled]="!fourthFormGroup.valid"  [ngStyle]="{
+              'background-color': !fourthFormGroup.valid ? 'grey' : 'green'
+            }">Suivant</button>
+          </div>
+        </form>
+      </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Fin</ng-template>
+      <div class="ltn__team-details-area">
+        <div class="container">
+            <div class="row">
+              <h2>Récapitulatif de votre réservation</h2>
+                <div class="col-lg-12 justify-content-center" style="background-color: var(--border-color-8);
+                margin-bottom: 34px;" >
+                    <div class="ltn__team-details-member-info-details">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="ltn__team-details-member-about">
+                                    <ul>
+                                      <li><strong>Nom:</strong> {{ this.thirdFormGroup.get('NomCtrl')?.value}}</li>
+                                      <li><strong>Prénom:</strong> {{ this.thirdFormGroup.get('PreCtrl')?.value }}</li>
+                                      <li><strong>Email:</strong> {{ this.thirdFormGroup.get('EmailCtrl')?.value}}</li>
+                                      <li><strong>Téléphone:</strong> {{ this.thirdFormGroup.get('TeleCtrl')?.value}}</li>
+                                      <li><strong>Date:</strong>le  {{formatDateForDisplay(fourthFormGroup?.get('dateCtrl')?.value) }}</li>
+                                      <li><strong>Heure:</strong> {{this.fourthFormGroup.get('timeCtrl')?.value }}</li>                  
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="ltn__team-details-member-about">
+                                    <ul>
+                                      <li><strong>Reseau :</strong> <img src="{{getLogReseau()}}"></li>
+                                      <li><strong>Centre:</strong> {{ getName()}}</li>
+                                      <li><strong>Type de véhicule:</strong> {{ this.firstFormGroup.get('typeVehiculeCtrl')?.value }}</li>
+                                      <li><strong>Type de visite:</strong> {{this.firstFormGroup.get('typeVisiteCtrl')?.value }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      <div>
+        <form [formGroup]="fourthFormGroup" (ngSubmit)="submitRendezVous()">
+        <button  class="button" matStepperPrevious>Retour</button>
+        <button class="Annuler" (click)="stepper.reset()">Annuler</button>
+        <button  class="Soumettre" type="submit" (click)="showSwwal()">Soumettre</button>
+      </form>
+      </div>
+    </mat-step>
+    </div>
+    
+  </mat-stepper>

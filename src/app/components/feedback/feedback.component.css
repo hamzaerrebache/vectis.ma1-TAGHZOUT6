@@ -1,0 +1,8 @@
+.media{
+    padding-top: 117px;
+  }
+  @media (max-width:767px){
+    .ltn__breadcrumb-area-2{
+        margin-top: 43px;
+    }
+  }

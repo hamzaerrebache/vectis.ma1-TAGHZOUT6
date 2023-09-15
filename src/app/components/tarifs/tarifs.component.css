@@ -1,0 +1,61 @@
+titre{
+    display: inline-block;
+    font-size: 50px;
+    text-align: center;
+    padding-left: 130px;
+  }
+  [aria-selected="true"] {
+    border: 2px solid white;
+    color: #00013b;
+  }
+  .nav a {
+    font-size: 15px;
+  }
+  *{
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .typed {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    animation: typing;
+    animation-duration: 1.5s;
+    animation-timing-function: steps(30, end);
+    animation-fill-mode: forwards;
+  }
+    
+  .ltn__product-item-3{border:none}
+
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  
+   .vertical-text {
+    writing-mode: vertical-lr;
+    text-align: center; /* Pour centrer le texte verticalement dans la cellule */
+    padding: 10px; /* Pour ajouter un peu d'espace autour du texte */
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+  }
+
+  thead th {
+  width: 25%;
+}
+
+.media{
+  padding-top: 117px;
+}
+@media (max-width:767px){
+  .ltn__breadcrumb-area-2{
+      margin-top: 43px;
+  }
+}

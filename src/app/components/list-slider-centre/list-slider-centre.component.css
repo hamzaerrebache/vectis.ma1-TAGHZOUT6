@@ -1,0 +1,74 @@
+.btn-wrapper{
+    margin-left: 25%;
+    width: fit-content;
+    background-color: var(--bs-green);
+    color: white;
+    transition: background-color 270ms linear;
+  }
+  .btn-wrapper:hover{
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+  }
+  .link-link{
+    text-decoration: none;
+  outline: none;
+  color: inherit;                     
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding: 21px;
+}
+
+.actions .action {
+  font-size: 15px;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+    height: 60px;
+  line-height: 20px;
+  display: block;
+  font-weight: 700;
+  padding-top: 18px;
+  /* margin: 4px; */
+  padding-left: 45px;
+  /* padding-top: 20px; */
+  /* padding-left: 53px; */
+  background-color: #ffc300;
+
+}
+
+.actions .action:hover{
+
+    
+    transition: transform 0.3s;
+    border: 1px solid black;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+    color: black;
+    background-color:white ;
+
+}
+
+.actions .view-centre:before {
+  background-position : 0 -86px;
+  width               : 18px;
+  height              : 20px;
+}
+
+.actions .web-site:before {
+  background-position: 0px -67px;
+  width: 19px;
+  height: 20px;
+  margin-left: -20px;
+
+}
+
+.ico-before:before {
+  content: ' ';
+  position: absolute;
+}
+
+::ng-deep mat-select {
+  border-radius: 0px;
+  top: 0px;
+  height: 30px;
+
+  }

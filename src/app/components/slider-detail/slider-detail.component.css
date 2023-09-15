@@ -1,0 +1,15 @@
+
+#square-buttons {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%
+    }
+.fa-chevron-left ,.fa-chevron-right{
+    color: black;
+    border: 1px solid white;
+    width: 41px;
+    height: 41px;
+    padding: 12px;
+    background-color: var(--border-color-1);
+}
+

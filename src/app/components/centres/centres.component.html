@@ -1,0 +1,450 @@
+
+
+<div class="media">
+    <div  data-bs-bg="assets/autoraute.png" class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-overlay-theme-black-90 bg-image"
+        style="padding-top: 19px;padding-bottom: 55px;background-image: url('assets/autoraute.png');">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ltn__breadcrumb-inner ltn__breadcrumb-inner-2 justify-content-between">
+                        <div class="section-title-area ltn__section-title-2">
+                            <h6 class="section-subtitle" style="color: #ffc300;;">// Trouver votre centre facilement</h6>
+                            <h1 class="section-title white-color">Trouver votre centre le plus proche</h1>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="ltn__location-search ">
+                    <form class="clearfix">
+                        <div>
+                            <!-- je viens de changer padding-bottom de 20px vers 0px  -->
+                            <form style="padding: 0px; color: floralwhite ;width: auto; padding-bottom: 0px;"
+                                [formGroup]="myForm" (submit)="onSubmit()">
+                                <div class="row" style="margin-left: 50px; margin-right: 50px;">
+                                    <div class="col-xl-2 col-sm-12 ">
+                                        <label style="margin: 17px;" for="check">Trier par
+                                            Km</label>
+                                        <input type="checkbox"  id="check" class="form-check-input"
+                                            formControlName="checkboxControl" style="margin-top: 23px;"
+                                            (change)="toggleCityInput()">
+                                    </div>
+                                    <div class="col-xl-4 col-sm-12 ">
+                                        <input formControlName="city" type="text" placeholder="Ville"
+                                            list="dynmicUserIds" id="inputSearch"
+                                            style="width: 100%;background-color: #f5f5f5;font-family: 'Roboto';">
+                                        <datalist id="dynmicUserIds">
+                                            <option *ngFor="let city of Cities" [value]="city">{{city}}</option>
+                                        </datalist>
+                                    </div>
+                                    <div class="col-xl-4 col-sm-12"> 
+                                      
+                                        <select style="height: 60px;
+                                        background: #f5f5f5;;
+                                        width: 100%;
+                                        border: 1px solid #ccc;
+                                        font-family: 'Roboto';
+                                        margin-bottom: 30px;" formControlName="nomReseau">
+                                            <option value="" disabled selected>Sélèctionner le réseau</option>  
+                                            <option value="">TOUS LES RÉSEAUX</option>                     
+                                              <option value="DEKRA">DEKRA</option>
+                                              <option value="REVITEX">REVITEX</option>   
+                                              <option value="SALAMA">SALAMA</option>     
+                                              <option value="SGS">SGS</option>
+                                            
+                                          
+                                          </select>
+
+                                    </div>
+
+                                    <div class="col-xl-2  col-sm-12">
+                                        <button style="width:100%;margin-left: 1px;background-color: #f5f5f5;;margin-bottom: 27px;" class="btn2"
+                                            type="submit">Chercher</button>
+                                    </div>
+
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="ltn__google-map-locations-area" *ngIf="geograph">
+        <div id="gmap" *ngIf="geograph">
+            <div *ngIf="geograph">
+                <div *ngIf="geograph" class="map-container">
+                    <div class="map-frame" *ngIf="geograph">
+                        <div *ngIf="geograph" id="map"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="ltn__google-map-locations-list-area  " style="margin-top: -100px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+                </div>
+                <div>
+                    <div class="row" *ngIf="isChecked==true && nomReseau && !ville">
+                        <div class="col-md-12">
+                            <div>
+                                <h1 style="color: #707070;
+                            font-weight: 300;
+                            margin: 20px 0;"><span
+                                        style="color: #322783;">{{getCentersOnSortByReseauName(nomReseau).length}}</span>
+                                    Résultats trouvés</h1>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row" *ngIf="isChecked==true && nomReseau && !ville">
+                        <div *ngFor="let center of getCentersOnSortByReseauName(nomReseau)" class="col-md-4">
+                            <div class="ltn__map-item" [style.background-image]="'url(' + center.logReseau + ')'" style="
+                                background-repeat: no-repeat;
+                                background-position: top right;
+                                background-size: 72px;">
+                                <div class="container">
+                                    <div class="info" style="margin-top:-16px">
+
+                                        <i style="color: red;" class="fas fa-map-marker-alt"> {{center.distance}} Km</i>
+                                        <h3 class="ltn__location-name"> {{ center.name}} </h3>
+                                    </div>
+                                </div>
+                                <h5 class="ltn__location-single-info"><i
+                                        class="fas fa-map-marked-alt"></i>{{center.adresse}}<br></h5>
+                                <h4 class="ltn__location-single-info"><i class="fas fa-phone-volume"></i><a href="tel:{{center.tele}}">{{center.tele}}</a>
+                                </h4>
+                                <div _ngcontent-ng-c3850533388="" class="row">
+                                    <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
+                                        style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
+                                            _ngcontent-ng-c3620032011="" href="/Center-details/{{center.id}}"
+                                            class="action web-site ico-before"><i
+                                                class="fa-solid fa-circle-info"></i>Détails</a></div>
+                                    <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
+                                        style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
+                                            _ngcontent-ng-c3620032011="" target="_blank" href="https://www.google.com/maps?q={{center.lat}},{{center.lng}}"
+                                            class="action web-site ico-before"><i class="fas fa-map"></i>Itinéraire</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="isChecked==true && ville && !nomReseau ">
+                        <div class="col-md-12">
+                            <div>
+                                <h1 style="color: #707070;
+                            font-weight: 300;
+                            margin: 20px 0;"><span
+                                        style="color: #322783;">{{getCentersOnSortByCity(ville).length}}</span>
+                                    Résultats trouvés</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="isChecked==true && ville && !nomReseau">
+                        <div *ngFor="let center of getCentersOnSortByCity(ville)" class="col-md-4">
+
+
+                            <div class="ltn__map-item" [style.background-image]="'url(' + center.logReseau + ')'" style="
+                                  background-repeat: no-repeat;
+                                  background-position: top right;
+                                  background-size: 72px;">
+                                <div class="container">
+                                    <div class="info" style="margin-top:-16px">
+                                        
+                                        <i style="color: red;" class="fas fa-map-marker-alt"> {{center.distance}} Km</i>
+                                        <h3 class="ltn__location-name"> {{ center.name}} </h3>
+                                    </div>
+                                </div>
+                                <h5 class="ltn__location-single-info"><i
+                                        class="fas fa-map-marked-alt"></i>{{center.adresse}}<br></h5>
+                                <h4 class="ltn__location-single-info"><i class="fas fa-phone-volume"></i><a href="tel:{{center.tele}}">{{center.tele}}</a>
+                                </h4>
+                                <div _ngcontent-ng-c3850533388="" class="row">
+                                    <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
+                                        style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
+                                            _ngcontent-ng-c3620032011="" href="/Center-details/{{center.id}}"
+                                            class="action web-site ico-before"><i
+                                                class="fa-solid fa-circle-info"></i>Détails</a></div>
+                                    <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
+                                        style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
+                                            _ngcontent-ng-c3620032011="" target="_blank" href="https://www.google.com/maps?q={{center.lat}},{{center.lng}}"
+                                            class="action web-site ico-before"><i class="fas fa-map"></i>Itinéraire</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="isChecked==true && ville && nomReseau">
+                        <div class="col-md-12">
+                            <div>
+                                <h1 style="color: #707070;
+                            font-weight: 300;
+                            margin: 20px 0;"><span
+                                        style="color: #322783;">{{getCentersOnSortCityandReseauName(ville,nomReseau).length}}</span>
+                                    Résultats trouvés</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="isChecked==true && ville && nomReseau">
+                        <div *ngFor="let center of getCentersOnSortCityandReseauName(ville,nomReseau)" class="col-md-4">
+                            <div class="ltn__map-item" [style.background-image]="'url(' + center.logReseau + ')'" style="
+                                  background-repeat: no-repeat;
+                                  background-position: top right;
+                                  background-size: 72px;">
+                                <div class="container">
+                                    <div class="info" style="margin-top:-16px">
+                                        <!-- <span  [ngStyle]="{'left.px': center.distance >= 10 ? 280 : 290}" *ngIf="center.distance > 0 " style="font-size: 1rem; font-weight: bold;     left: 277px;padding: 1px;
+                                            position: absolute;
+                                            color: rgb(214, 14, 14);margin-top: 5px;" >{{center.distance}} Km</span> -->
+                                        <i style="color: red;" class="fas fa-map-marker-alt"> {{center.distance}} Km</i>
+                                        <h3 class="ltn__location-name"> {{ center.name}} </h3>
+                                    </div>
+                                </div>
+                                <h5 class="ltn__location-single-info"><i
+                                        class="fas fa-map-marked-alt"></i>{{center.adresse}}<br></h5>
+                                <h4 class="ltn__location-single-info"><i class="fas fa-phone-volume"></i><a href="tel:{{center.tele}}">{{center.tele}}</a>
+                                </h4>
+                                <div _ngcontent-ng-c3850533388="" class="row">
+                                    <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
+                                        style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
+                                            _ngcontent-ng-c3620032011="" href="/Center-details/{{center.id}}"
+                                            class="action web-site ico-before"><i
+                                                class="fa-solid fa-circle-info"></i>Détails</a></div>
+                                    <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
+                                        style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
+                                            _ngcontent-ng-c3620032011="" target="_blank" href="https://www.google.com/maps?q={{center.lat}},{{center.lng}}"
+                                            class="action web-site ico-before"><i class="fas fa-map"></i>Itinéraire</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="center.nomReseau!==nomReseau && center.ville!==ville" style="display: none;">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="ville && !(nomReseau) && isChecked==false && error==false " class="row">
+                        <div class="col-md-12">
+                            <div>
+                                <h1 style="color: #707070;
+                            font-weight: 300;
+                            margin: 20px 0;"><span style="color: #322783;">{{getCentersByCity().length}}</span>
+                                    Résultats trouvés</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="ville && !(nomReseau) && error==false && isChecked==false">
+                        <div class="col-md-4" *ngFor="let center of getCentersByCity()">
+                            <div class="ltn__map-item" [style.background-image]="'url(' + center.logReseau + ')'" style="
+                        background-repeat: no-repeat;
+                        background-position: top right;
+                        background-size: 72px;">
+
+                                <h3 class="ltn__location-name"> {{ center.name}} </h3>
+                                <h5 class="ltn__location-single-info"><i
+                                        class="fas fa-map-marked-alt"></i>{{center.adresse}}<br></h5>
+                                <h4 class="ltn__location-single-info"><i class="fas fa-phone-volume"></i><a href="tel:{{center.tele}}">{{center.tele}}</a>
+                                </h4>
+                                <div _ngcontent-ng-c3850533388="" class="row">
+                                    <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
+                                        style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
+                                            _ngcontent-ng-c3620032011="" href="/Center-details/{{center.id}}"
+                                            class="action web-site ico-before"><i
+                                                class="fa-solid fa-circle-info"></i>Détails</a></div>
+                                    <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
+                                        style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
+                                            _ngcontent-ng-c3620032011="" target="_blank" href="https://www.google.com/maps?q={{center.lat}},{{center.lng}}"
+                                            class="action web-site ico-before"><i class="fas fa-map"></i>Itinéraire</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf=" isChecked==false && !ville && !nomReseau ">
+                        <div class="col-md-12">
+                            <div>
+                                <h1 style="color: #707070;
+                            font-weight: 300;
+                            margin: 20px 0;"><span style="color: #322783;">{{centers.length}}</span> Résultats trouvés
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row"
+                        *ngIf="error==true && isChecked==false && !(isChecked==false && !ville && !nomReseau) ">
+                        <div class="col-md-12">
+                            <div>
+                                <h1 style="color: #707070;
+                            font-weight: 300;
+                            margin: 20px 0;"><span style="color: #322783;">0</span> Résultats trouvés</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf=" isChecked==false && !ville && !nomReseau ">
+                        <div class="col-md-4" *ngFor="let center of centers">
+                            <div class="ltn__map-item" [style.background-image]="'url(' + center.logReseau + ')'" style="
+                        background-repeat: no-repeat;
+                        background-position: top right;
+                        background-size: 72px;">
+
+                                <h3 class="ltn__location-name"> {{ center.name}} </h3>
+                                <h5 class="ltn__location-single-info"><i
+                                        class="fas fa-map-marked-alt"></i>{{center.adresse}}<br></h5>
+                                <h4 class="ltn__location-single-info"><i class="fas fa-phone-volume"></i><a href="tel:{{center.tele}}">{{center.tele}}</a>
+                                </h4>
+                                <div _ngcontent-ng-c3850533388="" class="row">
+                                    <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
+                                        style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
+                                            _ngcontent-ng-c3620032011="" href="/Center-details/{{center.id}}"
+                                            class="action web-site ico-before"><i
+                                                class="fa-solid fa-circle-info"></i>Détails</a></div>
+                                    <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
+                                        style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
+                                            _ngcontent-ng-c3620032011="" target="_blank" href="https://www.google.com/maps?q={{center.lat}},{{center.lng}}"
+                                            class="action web-site ico-before"><i class="fas fa-map"></i>Itinéraire</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="!nomReseau && !ville && isChecked==true ">
+                        <div class="col-md-12">
+                            <div>
+                                <h1 style="color: #707070;
+                            font-weight: 300;
+                            margin: 20px 0;"><span style="color: #322783;">{{Centers1.length}}</span> Résultats trouvés
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="!nomReseau && !ville && isChecked==true ">
+                        <div class="col-md-4" *ngFor="let center of Centers1">
+                            <div class="ltn__map-item" [style.background-image]="'url(' + center.logReseau + ')'" style="
+                        background-repeat: no-repeat;
+                        background-position: top right;
+                        background-size: 72px;">
+                                <div class="container">
+                                    <div class="info" style="margin-top:-16px">
+
+                                        <i style="color: red;" class="fas fa-map-marker-alt"> {{center.distance}} Km</i>
+                                        <h3 class="ltn__location-name"> {{ center.name}} </h3>
+                                    </div>
+
+
+                                </div>
+
+
+                                <h5 class="ltn__location-single-info"><i
+                                        class="fas fa-map-marked-alt"></i>{{center.adresse}}<br></h5>
+                                <h4 class="ltn__location-single-info"><i class="fas fa-phone-volume"></i><a href="tel:{{center.tele}}">{{center.tele}}</a>
+                                </h4>
+                                <div _ngcontent-ng-c3850533388="" class="row">
+                                    <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
+                                        style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
+                                            _ngcontent-ng-c3620032011="" href="/Center-details/{{center.id}}"
+                                            class="action web-site ico-before"><i
+                                                class="fa-solid fa-circle-info"></i>Détails</a></div>
+                                    <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
+                                        style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
+                                            _ngcontent-ng-c3620032011="" target="_blank" href="https://www.google.com/maps?q={{center.lat}},{{center.lng}}"
+                                            class="action web-site ico-before"><i class="fas fa-map"></i>Itinéraire</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="nomReseau && !(nomReseau && ville)" class="row">
+                        
+                    </div>
+                    <div class="row" *ngIf="nomReseau && error==false  && !(nomReseau && ville)">
+                        <div class="col-md-12">
+                            <div>
+                                <h1 style="color: #707070;
+                            font-weight: 300;
+                            margin: 20px 0;"><span style="color: #322783;">{{getCentersByReseau().length}}</span>
+                                    Résultats trouvés</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="nomReseau && error==false  && !(nomReseau && ville)">
+                        <div class="col-md-4" *ngFor="let center of getCentersByReseau()">
+                            <div class="ltn__map-item" [style.background-image]="'url(' + center.logReseau + ')'" style="
+                        background-repeat: no-repeat;
+                        background-position: top right;
+                        background-size: 72px;">
+
+                                <h3 class="ltn__location-name"> {{ center.name}} </h3>
+                                <h5 class="ltn__location-single-info"><i
+                                        class="fas fa-map-marked-alt"></i>{{center.adresse}}<br></h5>
+                                <h4 class="ltn__location-single-info"><i class="fas fa-phone-volume"></i><a href="tel:{{center.tele}}">{{center.tele}}</a>
+                                </h4>
+                                <div _ngcontent-ng-c3850533388="" class="row">
+                                    <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
+                                        style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
+                                            _ngcontent-ng-c3620032011="" href="/Center-details/{{center.id}}"
+                                            class="action web-site ico-before"><i
+                                                class="fa-solid fa-circle-info"></i>Détails</a></div>
+                                    <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
+                                        style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
+                                            _ngcontent-ng-c3620032011="" target="_blank" href="https://www.google.com/maps?q={{center.lat}},{{center.lng}}"
+                                            class="action web-site ico-before"><i class="fas fa-map"></i>Itinéraire</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="nomReseau && ville && error==false">
+                        <div class="col-md-12">
+                            <div>
+                                <h1 style="color: #707070;
+                            font-weight: 300;
+                            margin: 20px 0;"><span
+                                        style="color: #322783;">{{getCentersByCityAndReseau().length}}</span> Résultats
+                                    trouvés</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="nomReseau && ville && error==false">
+                        <div class="col-md-4" *ngFor="let center of getCentersByCityAndReseau()">
+                            <div class="ltn__map-item" [style.background-image]="'url(' + center.logReseau + ')'" style="
+                        background-repeat: no-repeat;
+                        background-position: top right;
+                        background-size: 72px;">
+
+                                <h3 class="ltn__location-name"> {{ center.name}} </h3>
+                                <h5 class="ltn__location-single-info"><i
+                                        class="fas fa-map-marked-alt"></i>{{center.adresse}}<br></h5>
+                                <h4 class="ltn__location-single-info"><i class="fas fa-phone-volume"></i><a href="tel:{{center.tele}}">{{center.tele}}</a>
+                                </h4>
+                                <div _ngcontent-ng-c3850533388="" class="row">
+                                    <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
+                                        style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
+                                            _ngcontent-ng-c3620032011="" href="/Center-details/{{center.id}}"
+                                            class="action web-site ico-before"><i
+                                                class="fa-solid fa-circle-info"></i>Détails</a></div>
+                                    <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
+                                        style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
+                                            _ngcontent-ng-c3620032011="" target="_blank" href="https://www.google.com/maps?q={{center.lat}},{{center.lng}}"
+                                            class="action web-site ico-before"><i class="fas fa-map"></i>Itinéraire</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

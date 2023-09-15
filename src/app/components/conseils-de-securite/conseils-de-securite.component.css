@@ -1,0 +1,44 @@
+@media (max-width:767px){
+    .ltn__breadcrumb-area-2{
+        margin-top: 50px;
+    }
+}
+
+h2{
+    color: var(--bs-green);
+    border : 2px green solid;
+    width: 100%;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+  }
+  h6{
+    color:rgb(83, 81, 81);
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  @media (max-width:767px){
+      .image1{
+          width: 100%;
+      }
+  }
+  
+  img {
+    width: 100%;
+  }
+  @media (min-width: 40em) {
+    /* Probably some parent element that limits the img width */
+    main {
+      width: 80%;
+    }
+  }
+  
+  .media{
+    padding-top: 117px;
+  }
+  @media (max-width:767px){
+    .ltn__breadcrumb-area-2{
+        margin-top: 43px;
+    }
+  }
+  
+  
