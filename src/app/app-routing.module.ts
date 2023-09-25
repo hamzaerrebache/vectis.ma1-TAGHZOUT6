@@ -20,7 +20,9 @@ import { OuvrirCentreComponent } from './components/ouvrir-centre/ouvrir-centre.
 import { ListSliderCentreComponent } from './components/list-slider-centre/list-slider-centre.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
-
+import { TermsConditionsComponent } from './components/terms-conditions/terms-conditions.component';
+import { PoliciesProtectionsComponent } from './components/policies-protections/policies-protections.component';
+import { MentionsLegalesComponent } from './components/mentions-legales/mentions-legales.component';
 
 
 const routes: Routes = [
@@ -42,7 +44,10 @@ const routes: Routes = [
   { path:'Titre-de-propriété',component:TitreDePropeieteComponent },
   { path:'Périodicité',component:PeriodeComponent },
   { path:'ouvrir-centre-visite-technique-maroc',component:OuvrirCentreComponent },
-  {path:'List-slider-center',component:ListSliderCentreComponent},
+  { path:'List-slider-center',component:ListSliderCentreComponent},
+  { path:'terms-conditions',component:TermsConditionsComponent},
+  { path:'policies-protections',component:PoliciesProtectionsComponent},
+  { path:'mentions-legales',component:MentionsLegalesComponent},
   {path:'Comment',component:FeedbackComponent},
   {path:'**',pathMatch:'full',component:PagenotfoundComponent}
 

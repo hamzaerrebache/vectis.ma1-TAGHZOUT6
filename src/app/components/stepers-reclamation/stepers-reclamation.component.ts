@@ -112,6 +112,7 @@ export class StepersReclamationComponent  implements OnInit {
   selected: Center | null = null;
   nameFile !:string;
   
+  
 
   times: Times[] = [
     {value: '9:00 AM - 11:00 AM', viewValue: '9:00 AM - 11:00 AM'},
@@ -458,7 +459,7 @@ export class StepersReclamationComponent  implements OnInit {
   }
   showSwwal(){
     Swal.fire({
-      title: 'Votre Réclamation a été effectué. Vérifiez votre e-mail pour obtenir votre code de suivi',
+      title: 'Votre réclamation a été effectuée. Vérifiez votre e-mail pour obtenir votre code de suivi',
       text: "Retour à la page d'accueil",
       icon: TYPE.SUCCESS,
       confirmButtonText: 'OK',

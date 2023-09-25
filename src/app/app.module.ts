@@ -51,6 +51,12 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
 import { KinstaSlideBarComponent } from './components/kinsta-slide-bar/kinsta-slide-bar.component';
 import { StepperCommentComponent } from './components/stepper-comment/stepper-comment.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
+import { MatIcon } from '@angular/material/icon';
+import { StepperEditableExampleComponent } from './components/stepper-editable-example/stepper-editable-example.component';
+import { TermsConditionsComponent } from './components/terms-conditions/terms-conditions.component';
+import { PoliciesProtectionsComponent } from './components/policies-protections/policies-protections.component';
+import { MentionsLegalesComponent } from './components/mentions-legales/mentions-legales.component';
+
 
 @NgModule({
   declarations: [
@@ -84,7 +90,11 @@ import { FeedbackComponent } from './components/feedback/feedback.component';
     ListSliderCentreComponent,
     PagenotfoundComponent,
     KinstaSlideBarComponent,
-    FeedbackComponent
+    FeedbackComponent,
+    TermsConditionsComponent,
+    PoliciesProtectionsComponent,
+    MentionsLegalesComponent,
+
    
     
   ],
@@ -109,6 +119,7 @@ import { FeedbackComponent } from './components/feedback/feedback.component';
     MatSelectModule,
     RatingModule,
     StepersReclamationComponent,
+    StepperEditableExampleComponent,
     SweetAlert2Module.forRoot()
    
   ],

@@ -89,3 +89,29 @@ p {
   pointer-events: none;
   color: gray;
 }
+
+.mat-step-icon .mat-icon:contains("Lien spécial") {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+::ng-deep .mat-step-icon-state-edit {
+  border: 2px solid green;
+  background-color: #FFFF !important;
+}
+
+::ng-deep .mat-step-icon-state-edit::before{
+  content: "\2714"!important;
+  font-size: 20px!important;
+  color: #3f51b5 !important;
+  top: -6px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+::ng-deep .mat-step-icon .mat-icon {
+  display: none !important;
+}

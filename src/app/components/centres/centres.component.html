@@ -38,22 +38,18 @@
                                     </div>
                                     <div class="col-xl-4 col-sm-12"> 
                                       
-                                        <select style="height: 60px;
-                                        background: #f5f5f5;;
-                                        width: 100%;
-                                        border: 1px solid #ccc;
-                                        font-family: 'Roboto';
-                                        margin-bottom: 30px;" formControlName="nomReseau">
-                                            <option value="" disabled selected>Sélèctionner le réseau</option>  
-                                            <option value="">TOUS LES RÉSEAUX</option>                     
-                                              <option value="DEKRA">DEKRA</option>
-                                              <option value="REVITEX">REVITEX</option>   
-                                              <option value="SALAMA">SALAMA</option>     
-                                              <option value="SGS">SGS</option>
-                                            
+                                        <mat-form-field style="width: 100%; margin-bottom: 20px;">
+                                            <mat-label>Sélectionner le réseau</mat-label>
+                                            <mat-select formControlName="nomReseau">
+                                              <mat-option disabled selected value="">Sélectionner le réseau</mat-option>
+                                              <mat-option value="">TOUS LES RÉSEAUX</mat-option>
+                                              <mat-option value="DEKRA">DEKRA</mat-option>
+                                              <mat-option value="REVITEX">REVITEX</mat-option>
+                                              <mat-option value="SALAMA">SALAMA</mat-option>
+                                              <mat-option value="SGS">SGS</mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
                                           
-                                          </select>
-
                                     </div>
 
                                     <div class="col-xl-2  col-sm-12">
@@ -128,11 +124,11 @@
                                         style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
                                             _ngcontent-ng-c3620032011="" href="/Center-details/{{center.id}}"
                                             class="action web-site ico-before"><i
-                                                class="fa-solid fa-circle-info"></i>Détails</a></div>
+                                                class="fa-solid fa-circle-info"></i><span style="padding-left: 5px;">Détails</span></a></div>
                                     <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
                                         style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
                                             _ngcontent-ng-c3620032011="" target="_blank" href="https://www.google.com/maps?q={{center.lat}},{{center.lng}}"
-                                            class="action web-site ico-before"><i class="fas fa-map"></i>Itinéraire</a>
+                                            class="action web-site ico-before"><i class="fas fa-map"></i><span style="padding-left: 5px;">Itinéraire</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -175,11 +171,11 @@
                                         style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
                                             _ngcontent-ng-c3620032011="" href="/Center-details/{{center.id}}"
                                             class="action web-site ico-before"><i
-                                                class="fa-solid fa-circle-info"></i>Détails</a></div>
+                                                class="fa-solid fa-circle-info"></i><span style="padding-left: 5px;">Détails</span></a></div>
                                     <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
                                         style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
                                             _ngcontent-ng-c3620032011="" target="_blank" href="https://www.google.com/maps?q={{center.lat}},{{center.lng}}"
-                                            class="action web-site ico-before"><i class="fas fa-map"></i>Itinéraire</a>
+                                            class="action web-site ico-before"><i class="fas fa-map"></i><span style="padding-left: 5px;">Itinéraire</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -219,12 +215,12 @@
                                     <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
                                         style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
                                             _ngcontent-ng-c3620032011="" href="/Center-details/{{center.id}}"
-                                            class="action web-site ico-before"><i
-                                                class="fa-solid fa-circle-info"></i>Détails</a></div>
+                                            class="action web-site ico-before">
+                                            <i class="fa-solid fa-circle-info"></i><span style="padding-left: 5px;">Détails</span></a></div>
                                     <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
                                         style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
                                             _ngcontent-ng-c3620032011="" target="_blank" href="https://www.google.com/maps?q={{center.lat}},{{center.lng}}"
-                                            class="action web-site ico-before"><i class="fas fa-map"></i>Itinéraire</a>
+                                            class="action web-site ico-before"><i class="fas fa-map"></i><span style="padding-left: 5px;">Itinéraire</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -261,11 +257,11 @@
                                         style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
                                             _ngcontent-ng-c3620032011="" href="/Center-details/{{center.id}}"
                                             class="action web-site ico-before"><i
-                                                class="fa-solid fa-circle-info"></i>Détails</a></div>
+                                                class="fa-solid fa-circle-info"></i><span style="padding-left: 5px;">Détails</span></a></div>
                                     <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
                                         style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
                                             _ngcontent-ng-c3620032011="" target="_blank" href="https://www.google.com/maps?q={{center.lat}},{{center.lng}}"
-                                            class="action web-site ico-before"><i class="fas fa-map"></i>Itinéraire</a>
+                                            class="action web-site ico-before"><i class="fas fa-map"></i><span style="padding-left: 5px;">Itinéraire</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -308,11 +304,11 @@
                                         style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
                                             _ngcontent-ng-c3620032011="" href="/Center-details/{{center.id}}"
                                             class="action web-site ico-before"><i
-                                                class="fa-solid fa-circle-info"></i>Détails</a></div>
+                                                class="fa-solid fa-circle-info"></i><span style="padding-left: 5px;">Détails</span></a></div>
                                     <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
                                         style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
                                             _ngcontent-ng-c3620032011="" target="_blank" href="https://www.google.com/maps?q={{center.lat}},{{center.lng}}"
-                                            class="action web-site ico-before"><i class="fas fa-map"></i>Itinéraire</a>
+                                            class="action web-site ico-before"><i class="fas fa-map"></i><span style="padding-left: 5px;">Itinéraire</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -355,11 +351,11 @@
                                         style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
                                             _ngcontent-ng-c3620032011="" href="/Center-details/{{center.id}}"
                                             class="action web-site ico-before"><i
-                                                class="fa-solid fa-circle-info"></i>Détails</a></div>
+                                                class="fa-solid fa-circle-info"></i><span style="padding-left: 5px;">Détails</span></a></div>
                                     <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
                                         style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
                                             _ngcontent-ng-c3620032011="" target="_blank" href="https://www.google.com/maps?q={{center.lat}},{{center.lng}}"
-                                            class="action web-site ico-before"><i class="fas fa-map"></i>Itinéraire</a>
+                                            class="action web-site ico-before"><i class="fas fa-map"></i><span style="padding-left: 5px;">Itinéraire</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -395,11 +391,11 @@
                                         style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
                                             _ngcontent-ng-c3620032011="" href="/Center-details/{{center.id}}"
                                             class="action web-site ico-before"><i
-                                                class="fa-solid fa-circle-info"></i>Détails</a></div>
+                                                class="fa-solid fa-circle-info"></i><span style="padding-left: 5px;">Détails</span></a></div>
                                     <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
                                         style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
                                             _ngcontent-ng-c3620032011="" target="_blank" href="https://www.google.com/maps?q={{center.lat}},{{center.lng}}"
-                                            class="action web-site ico-before"><i class="fas fa-map"></i>Itinéraire</a>
+                                            class="action web-site ico-before"><i class="fas fa-map"></i><span style="padding-left: 5px;">Itinéraire</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -434,11 +430,11 @@
                                         style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
                                             _ngcontent-ng-c3620032011="" href="/Center-details/{{center.id}}"
                                             class="action web-site ico-before"><i
-                                                class="fa-solid fa-circle-info"></i>Détails</a></div>
+                                                class="fa-solid fa-circle-info"></i><span style="padding-left: 5px;">Détails</span></a></div>
                                     <div _ngcontent-ng-c3850533388="" _ngcontent-ng-c3620032011="" class="actions col-6"
                                         style="height: auto; padding-top: 3px;"><a _ngcontent-ng-c3850533388=""
                                             _ngcontent-ng-c3620032011="" target="_blank" href="https://www.google.com/maps?q={{center.lat}},{{center.lng}}"
-                                            class="action web-site ico-before"><i class="fas fa-map"></i>Itinéraire</a>
+                                            class="action web-site ico-before"><i class="fas fa-map"></i><span style="padding-left: 5px;">Itinéraire</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -448,3 +444,5 @@
             </div>
         </div>
     </div>
+
+    

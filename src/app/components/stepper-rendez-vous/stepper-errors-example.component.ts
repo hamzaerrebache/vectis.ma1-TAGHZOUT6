@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup} from '@angular/forms';
+import {FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup, FormControl} from '@angular/forms';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
@@ -18,7 +18,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Center } from 'src/app/models/Center.model';
 import { ReverseGeocodingServiceService } from 'src/app/Services/reverse-geocoding-service.service';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule} from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 
  enum TYPE {
   ERROR='error',
@@ -55,6 +56,7 @@ interface DropdownOptions{
   standalone: true,
   imports: [
     MatStepperModule,
+    MatIconModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -97,42 +99,56 @@ export class StepperErrorsExampleComponent  implements OnInit {
   longitude!: number;
   CurrentAdress!: string;
   distance!: any;
+  isStep1 = true;
+  isEditable: boolean = false;
+  steps: number[] = [1, 2, 3, 4];
+  currentTime: Date = new Date();
+
+  stepCompleted: boolean[] = [false, false, false, false, false];
+
+  // Méthode pour déterminer si une étape est complétée
+  isStepCompleted(step: number): boolean {
+    return this.stepCompleted[step];
+  }
+
+  //@ViewChild('stepper') stepper!: MatStepper;
 
   times: Times[] = [
-    {value: '9:00 AM - 9:20 AM', viewValue: '9:00 AM - 9:20 AM'},
-    {value: '9:20 AM - 9:40 AM', viewValue: '9:20 AM - 9:40 AM'},
-    {value: '9:40 AM - 10:00 AM', viewValue: '9:40 AM - 10:00 AM'},
-    {value: '10:00 AM - 10:20 AM', viewValue: '10:00 AM - 10:20 AM'},
-    {value: '10:20 AM - 10:40 AM', viewValue: '10:20 AM - 10:40 AM'},
-    {value: '10:40 AM - 11:00 AM', viewValue: '10:40 AM - 11:00 AM'},
-    {value: '11:00 AM -11:20 AM', viewValue: '11:00 AM -11:20 AM'},
-    {value: '11:20 AM - 11:40 AM', viewValue: '11:20 AM - 11:40 AM'},
-    {value: '11:40 AM - 12:00 PM', viewValue: '11:40 AM - 12:00 PM'},
-    {value: '12:00 PM - 12:20 PM', viewValue: '12:00 PM - 12:20 PM'},
-    {value: '12:20 AM - 12:40 AM', viewValue: '12:20 AM - 12:40 AM'},
-    {value: '12:40 AM - 13:00 PM', viewValue: '12:40 AM - 13:00 PM'},
-    {value: '14:00 PM - 14:20 PM', viewValue: '14:00 PM - 14:20 PM'},
-    {value: '14:20 PM - 14:40 PM', viewValue:'14:20 PM - 14:40 PM'},
-    {value: '14:40 PM - 15:00 PM', viewValue: '14:40 PM - 15:00 PM'},
-    {value: '15:00 PM -  15:20 PM', viewValue: '15:00 PM -  15:20 PM'},
-    {value: '15:40 PM - 16:00 PM', viewValue: '15:40 PM - 16:00 PM'},
-    {value: '16:20 PM - 16:40 PM', viewValue: '16:20 PM - 16:40 PM'},
+    { value: '9:00', viewValue: '9:00 AM - 9:20 AM' },
+    { value: '9:20', viewValue: '9:20 AM - 9:40 AM' },
+    { value: '9:40', viewValue: '9:40 AM - 10:00 AM' },
+    { value: '10:00', viewValue: '10:00 AM - 10:20 AM' },
+    { value: '10:20', viewValue: '10:20 AM - 10:40 AM' },
+    { value: '10:40', viewValue: '10:40 AM - 11:00 AM' },
+    { value: '11:00', viewValue: '11:00 AM -11:20 AM' },
+    { value: '11:20', viewValue: '11:20 AM - 11:40 AM' },
+    { value: '11:40', viewValue: '11:40 AM - 12:00 PM' },
+    { value: '12:00', viewValue: '12:00 PM - 12:20 PM' },
+    { value: '12:20', viewValue: '12:20 AM - 12:40 AM' },
+    { value: '12:40', viewValue: '12:40 AM - 13:00 PM' },
+    { value: '14:00', viewValue: '14:00 PM - 14:20 PM' },
+    { value: '14:20', viewValue: '14:20 PM - 14:40 PM' },
+    { value: '14:40', viewValue: '14:40 PM - 15:00 PM' },
+    { value: '15:00', viewValue: '15:00 PM -  15:20 PM' },
+    { value: '15:40', viewValue: '15:40 PM - 16:00 PM' },
+    { value: '16:20', viewValue: '16:20 PM - 16:40 PM' },
   ];
+  
 
   
   times2: Times[] = [
-    {value: '9:00 AM - 9:30 AM', viewValue: '9:00 AM - 9:30 AM'},
-    {value: '9:30 AM - 10:00 AM', viewValue:'9:30 AM - 10:00 AM'},
-    {value: '10:00 AM - 10:30 AM', viewValue: '10:00 AM - 10:30 AM'},
-    {value: '10:30 AM - 11:00 AM', viewValue: '10:30 AM - 11:00 AM'},
-    {value: '11:00 AM - 11:30 AM', viewValue: '11:00 AM - 11:30 AM'},
-    {value: '11:30 AM - 12:00 PM', viewValue: '11:30 AM - 12:00 PM'},
-    {value: '12:30 PM - 13:00 PM', viewValue: '12:30 PM - 13:00 PM'},
-    {value: '14:00 PM - 14:30 PM', viewValue: '14:00 PM - 14:30 PM'},
-    {value: '14:30 PM - 15:00 PM', viewValue: '14:30 PM - 15:00 PM'},
-    {value: '15:00 PM - 15:30 PM', viewValue: '15:00 PM - 15:30 PM'},
-    {value: '15:30 PM - 16:00 PM', viewValue: '15:30 PM - 16:00 PM'},
-    {value: '16:00 PM - 16:30 PM', viewValue: '16:00 PM - 16:30 PM'},
+    {value: '9:00', viewValue: '9:00 AM - 9:30 AM'},
+    {value: '9:30', viewValue:'9:30 AM - 10:00 AM'},
+    {value: '10:00', viewValue: '10:00 AM - 10:30 AM'},
+    {value: '10:30', viewValue: '10:30 AM - 11:00 AM'},
+    {value: '11:00', viewValue: '11:00 AM - 11:30 AM'},
+    {value: '11:30', viewValue: '11:30 AM - 12:00 PM'},
+    {value: '12:30', viewValue: '12:30 PM - 13:00 PM'},
+    {value: '14:00', viewValue: '14:00 PM - 14:30 PM'},
+    {value: '14:30', viewValue: '14:30 PM - 15:00 PM'},
+    {value: '15:00', viewValue: '15:00 PM - 15:30 PM'},
+    {value: '15:30', viewValue: '15:30 PM - 16:00 PM'},
+    {value: '16:00', viewValue: '16:00 PM - 16:30 PM'},
   ];
 
   typeVehicules : Times[]=[ 
@@ -240,11 +256,57 @@ export class StepperErrorsExampleComponent  implements OnInit {
       TeleCtrl: ['',  [Validators.required,Validators.minLength(10), Validators.pattern(/^[0-9]{10}$/)]],
     });
     this.fourthFormGroup = this._formBuilder.group({
-      dateCtrl: ['', Validators.required], // Contrôle pour la date du rendez-vous
+      dateCtrl: ['', [Validators.required,this.dateSupérieureValidator()]], // Contrôle pour la date du rendez-vous
       timeCtrl: ['', Validators.required] // Contrôle pour l'heure du rendez-vous
     });
        this.getLocation();
   }
+
+  dateSupérieureValidator() {
+    return (control : FormControl): { [key: string]: any } | null => {
+      const currentDate = new Date();
+      const selectedDate = new Date(control.value);
+      currentDate.setHours(0,0,0,0);
+      selectedDate.setHours(0, 0, 0, 0);
+      console.log("currentDate",currentDate);
+      console.log("selectedDate",selectedDate);
+          if (selectedDate < currentDate   ) {
+      return { 'dateInvalide': true };
+    }
+    return null;
+  };
+  }
+
+  validateTime() {
+    const selectedTime = this.fourthFormGroup.get('timeCtrl')?.value;
+    const selectedDate = this.fourthFormGroup.get('dateCtrl')?.value;
+    const selectedTimeParts = selectedTime.split(':');
+    const selectedHour = parseInt(selectedTimeParts[0]);
+    const selectedMinute = parseInt(selectedTimeParts[1]);
+  
+    // Obtenir l'heure actuelle
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+    const currentMinute = currentTime.getMinutes();
+
+    const currentDate = new Date();
+    currentDate.setHours(0,0,0,0);
+
+    console.log('validateTime selectedDate',selectedDate.getTime());
+
+    console.log('validateTime currentTime',currentDate.getTime());
+
+    if ( selectedDate.getTime()==currentDate.getTime()){
+      if (selectedHour < currentHour || (selectedHour === currentHour && selectedMinute < currentMinute)) {
+        // La valeur sélectionnée est inférieure à l'heure actuelle, donc la validation échoue.
+        this.fourthFormGroup.get('timeCtrl')?.setErrors({ 'timeInvalid': true });
+      } else {
+        // Réinitialisez les erreurs si la valeur est valide.
+        this.fourthFormGroup.get('timeCtrl')?.setErrors(null);
+      }
+    }
+  }
+  
   onSubmit() {
     this.open=true
     this.centers.forEach((center) => {
